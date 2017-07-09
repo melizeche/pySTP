@@ -25,7 +25,7 @@ SECRET_KEY = 'gyg_^27@k-pnwz1ltbv4yv*_q$nmxod)num2v&wk%qa_lyxcsx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,12 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_filters',
+    'corsheaders',
     'rest_framework',
     'apps.tablerocp',
     'apps.spr',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -144,3 +147,19 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'PAGE_SIZE': 30
 }
+
+
+# Aceptar cookies
+CORS_ALLOW_CREDENTIALS = True
+
+# Expresion regular de los dominios donde el cliente puede correr
+CORS_ORIGIN_REGEX_WHITELIST = (r'^(https?://)?192.168.1.108', )
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+)
