@@ -23,6 +23,7 @@ router = routers.DefaultRouter()
 router.register(r'users', tablero_views.UserViewSet)
 router.register(r'groups', tablero_views.GroupViewSet)
 router.register(r'usuario', spr_views.UsuarioViewSet)
+router.register(r'institucion', spr_views.InstitucionViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
