@@ -16,12 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
-from apps.tablerocp import views
+from apps.tablerocp import views as tablero_views
+from apps.spr import views as spr_views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
-router.register(r'usuario', views.UsuarioViewSet)
+router.register(r'users', tablero_views.UserViewSet)
+router.register(r'groups', tablero_views.GroupViewSet)
+router.register(r'usuario', spr_views.UsuarioViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
