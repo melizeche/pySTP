@@ -148,7 +148,12 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 30
 }
 
-CORS_ORIGIN_ALLOW_ALL=True
+
+# Aceptar cookies
+CORS_ALLOW_CREDENTIALS = True
+
+# Expresion regular de los dominios donde el cliente puede correr
+CORS_ORIGIN_REGEX_WHITELIST = (r'^(https?://)?192.168.1.108', )
 
 CORS_ALLOW_METHODS = (
     'DELETE',
