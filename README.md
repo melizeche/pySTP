@@ -1,6 +1,6 @@
 # pySTP
 
-Implementación del Tablero de Control Presidencial de la STP
+Implementación del Sistema de Planificación por Resultado(SPR) Tablero de Control Presidencial(TCP) de la Secretaría Técnica de Planificación
 
 ## Requirements
 
@@ -21,6 +21,7 @@ pip install -r requirements.txt
 ## Usage
 ```
 ./manage.py migrate
+./manage.py createsuperuser
 ./manage.py runserver localhost:5000
 ```
 
