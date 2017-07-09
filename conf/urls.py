@@ -15,9 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from rest_framework import routers
+from apps.tablerocp import views
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+router.register(r'usuario', views.UsuarioViewSet)
 
 urlpatterns = [
-    #url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', admin.site.urls),
 ]
 admin.site.site_header = 'Administración PySTP'

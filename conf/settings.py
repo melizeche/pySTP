@@ -86,9 +86,17 @@ DATABASES = {
         'PASSWORD': 'stp123',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+    },
+    'spr': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'spr',
+        'USER': 'postgres',
+        'PASSWORD': 'stp123',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
-
+DATABASE_ROUTERS = ['apps.spr.routers.SprRouter',]
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -127,3 +135,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ],
+    'PAGE_SIZE': 10
+}
