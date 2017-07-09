@@ -73,6 +73,8 @@ function reset_all_password( new_pass ) {
  *
  * Solucionar:
  *   - Aplicar el algoritmo de hashing en el servidor (Solucionado en nuestro API Django)
+ *  Donde: /spr/src/main/webapp/usuarios.jsp lineas: 485, 1380
+ *         /spr/src/main/webapp/frames/pass.jsp lineas: 36, 37, 38
  */
 
  /**
