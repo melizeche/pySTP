@@ -17,7 +17,7 @@ sudo apt-get install python3 -y
 
 Virtualenv is optional but strongly suggested
 ```
-git clone git@github.com:melizeche/pytstp.git
+git clone https://github.com/melizeche/pySTP.git
 cd pystp
 virtualenv env -p python3
 source env/bin/activate
