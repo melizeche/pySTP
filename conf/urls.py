@@ -26,6 +26,7 @@ router.register(r'usuario', spr_views.UsuarioViewSet)
 router.register(r'institucion', spr_views.InstitucionViewSet)
 router.register(r'nivel', spr_views.NivelViewSet)
 router.register(r'entidad', spr_views.EntidadViewSet)
+router.register(r'unidad_jerarquica', spr_views.UnidadJerarquicaViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

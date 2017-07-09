@@ -568,6 +568,8 @@ class Entidad(models.Model):
     fecha_insercion = models.DateTimeField(blank=True, null=True)
     usuario_responsable = models.TextField(blank=True, null=True)
 
+    def __str__(self):
+        return str(self.id) + " - " + self.nombre
     class Meta:
         managed = False
         db_table = 'entidad'

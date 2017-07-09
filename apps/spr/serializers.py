@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from apps.spr.models import Usuario, Institucion, Nivel, Entidad
+from apps.spr.models import Usuario, Institucion, Nivel, Entidad, UnidadJerarquica
 
 
 class UsuarioSerializer(serializers.HyperlinkedModelSerializer):
@@ -28,7 +28,7 @@ class NivelSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Nivel
-        fields = ('id','numero_fila', 'cod_nivel', 'anho', 'nombre', 'descripcion', 'abrev', 'es_imputable',
+        fields = ('id', 'numero_fila', 'cod_nivel', 'anho', 'nombre', 'descripcion', 'abrev', 'es_imputable',
                   'fecha_creacion', 'verion', 'borrado', 'fecha_actualizacion', 'fecha_insercion',
                   'usuario_responsable')
 
@@ -37,7 +37,15 @@ class EntidadSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Entidad
-        fields = ('id','nombre', 'descripcion', 'anho', 'nivel', 'abrev', 'sigla', 'base_legal',
+        fields = ('id', 'nombre', 'descripcion', 'anho', 'nivel', 'abrev', 'sigla', 'base_legal',
                   'mision', 'vision', 'politica', 'objetivo', 'diagnostico', 'fecha_creacion',
                   'version', 'numero_fila', 'ruc', 'borrado', 'fecha_actualizacion', 'fecha_insercion',
                   'usuario_responsable')
+
+
+class UnidadJerarquicaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UnidadJerarquica
+        fields = ('id','nombre', 'descipcion', 'entidad', 'entidad_nivel_id', 'anho', 'numero_fila',
+                  'borrado', 'version', 'fecha_actualizacion', 'fecha_insercion', 'usuario_responsable')
