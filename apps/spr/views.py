@@ -1,8 +1,8 @@
 from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions
-from apps.spr.serializers import UsuarioSerializer, InstitucionSerializer
-from apps.spr.models import Usuario, Institucion
-
+from apps.spr.models import Usuario, Institucion, Nivel, Entidad
+from apps.spr.serializers import UsuarioSerializer, InstitucionSerializer, NivelSerializer, EntidadSerializer
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     """
@@ -19,3 +19,13 @@ class InstitucionViewSet(viewsets.ModelViewSet):
     #permission_classes = (permissions.IsAuthenticatedOrReadOnly)
     queryset = Institucion.objects.all()
     serializer_class = InstitucionSerializer
+
+class NivelViewSet(viewsets.ModelViewSet):
+    queryset = Nivel.objects.all()
+    serializer_class = NivelSerializer
+
+class EntidadViewSet(viewsets.ModelViewSet):
+    queryset = Entidad.objects.all()
+    serializer_class = EntidadSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('id', 'nivel_id')

@@ -24,6 +24,8 @@ router.register(r'users', tablero_views.UserViewSet)
 router.register(r'groups', tablero_views.GroupViewSet)
 router.register(r'usuario', spr_views.UsuarioViewSet)
 router.register(r'institucion', spr_views.InstitucionViewSet)
+router.register(r'nivel', spr_views.NivelViewSet)
+router.register(r'entidad', spr_views.EntidadViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

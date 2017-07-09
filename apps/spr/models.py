@@ -546,6 +546,7 @@ class EjeEstrategico(models.Model):
 
 
 class Entidad(models.Model):
+    #oid = models.IntegerField(primary_key=True)
     nombre = models.TextField(blank=True, null=True)
     descripcion = models.TextField(blank=True, null=True)
     anho = models.IntegerField(blank=True, null=True)
