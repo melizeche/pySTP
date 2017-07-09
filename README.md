@@ -11,7 +11,7 @@ Implementación del Tablero de Control Presidencial de la STP
 
 Virtualenv is optional but strongly suggested
 ```
-git clone git@github.com:melizeche/pytstp.git
+git clone https://github.com/melizeche/pySTP.git
 cd pystp
 virtualenv env -p python3.6
 source env/bin/activate
