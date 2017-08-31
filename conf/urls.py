@@ -27,9 +27,10 @@ router.register(r'institucion', spr_views.InstitucionViewSet)
 router.register(r'nivel', spr_views.NivelViewSet)
 router.register(r'entidad', spr_views.EntidadViewSet)
 router.register(r'unidad_jerarquica', spr_views.UnidadJerarquicaViewSet)
+router.register(r'avanceindicador', spr_views.AvanceIndicadorViewSet)
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    url(r'^v1/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', admin.site.urls),
 ]

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from apps.spr.models import Usuario, Institucion, Nivel, Entidad, UnidadJerarquica
+from apps.spr.models import Usuario, Institucion, Nivel, Entidad, UnidadJerarquica, AvanceIndicador
 
 
 class UsuarioSerializer(serializers.HyperlinkedModelSerializer):
@@ -8,6 +8,14 @@ class UsuarioSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Usuario
         fields = ('id', 'correo', 'nombre', 'entidad')
+
+
+class AvanceIndicadorSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = AvanceIndicador
+        fields = ('cantidad', 'vencimiento',
+                  'indicador_id','zona_geografica_id')
 
 
 class InstitucionSerializer(serializers.HyperlinkedModelSerializer):
@@ -47,5 +55,5 @@ class UnidadJerarquicaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UnidadJerarquica
-        fields = ('id','nombre', 'descipcion', 'entidad', 'entidad_nivel_id', 'anho', 'numero_fila',
+        fields = ('id', 'nombre', 'descipcion', 'entidad', 'entidad_nivel_id', 'anho', 'numero_fila',
                   'borrado', 'version', 'fecha_actualizacion', 'fecha_insercion', 'usuario_responsable')

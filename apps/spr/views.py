@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions
-from apps.spr.models import Usuario, Institucion, Nivel, Entidad, UnidadJerarquica
-from apps.spr.serializers import UsuarioSerializer, InstitucionSerializer, NivelSerializer, EntidadSerializer, UnidadJerarquicaSerializer
+from apps.spr.models import Usuario, Institucion, Nivel, Entidad, UnidadJerarquica, AvanceIndicador
+from apps.spr.serializers import UsuarioSerializer, InstitucionSerializer, NivelSerializer, EntidadSerializer, UnidadJerarquicaSerializer, AvanceIndicadorSerializer
 
 
 class UsuarioViewSet(viewsets.ModelViewSet):
@@ -22,6 +22,15 @@ class InstitucionViewSet(viewsets.ModelViewSet):
     queryset = Institucion.objects.all()
     serializer_class = InstitucionSerializer
 
+class AvanceIndicadorViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly)
+    queryset = AvanceIndicador.objects.all()
+    serializer_class = AvanceIndicadorSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('cantidad', 'indicador_id')
 
 class NivelViewSet(viewsets.ModelViewSet):
     queryset = Nivel.objects.all()
