@@ -4,7 +4,8 @@
 #   * Make sure each model has one field with primary_key=True
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
+# Feel free to rename the models, but don't rename db_table values or
+# field names.
 from __future__ import unicode_literals
 
 from django.db import models
@@ -23,7 +24,8 @@ class Accion(models.Model):
     ins_linea_accion_id = models.IntegerField(blank=True, null=True)
     depto_id = models.IntegerField(blank=True, null=True)
     dist_id = models.IntegerField(blank=True, null=True)
-    id_accion_catalogo = models.ForeignKey('AccionCatalogo', models.DO_NOTHING, db_column='id_accion_catalogo', blank=True, null=True)
+    id_accion_catalogo = models.ForeignKey(
+        'AccionCatalogo', models.DO_NOTHING, db_column='id_accion_catalogo', blank=True, null=True)
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
     fecha_insercion = models.DateTimeField(blank=True, null=True)
     usuario_responsable = models.TextField(blank=True, null=True)
@@ -37,7 +39,8 @@ class Accion(models.Model):
 class AccionCatalogo(models.Model):
     nombre = models.TextField(blank=True, null=True)
     descripcion = models.TextField(blank=True, null=True)
-    id_unidad_medida = models.ForeignKey('UnidadMedida', models.DO_NOTHING, db_column='id_unidad_medida')
+    id_unidad_medida = models.ForeignKey(
+        'UnidadMedida', models.DO_NOTHING, db_column='id_unidad_medida')
     version = models.IntegerField(blank=True, null=True)
     borrado = models.NullBooleanField()
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
@@ -50,7 +53,8 @@ class AccionCatalogo(models.Model):
 
 
 class AccionCatalogoHasOds(models.Model):
-    accion_catalogo = models.ForeignKey(AccionCatalogo, models.DO_NOTHING, primary_key=True)
+    accion_catalogo = models.OneToOneField(
+        AccionCatalogo, models.DO_NOTHING, primary_key=True)
     ods = models.ForeignKey('Ods', models.DO_NOTHING)
     peso = models.FloatField(blank=True, null=True)
 
@@ -61,7 +65,8 @@ class AccionCatalogoHasOds(models.Model):
 
 
 class AccionCatalogoHasPnd(models.Model):
-    accion_catalogo = models.ForeignKey(AccionCatalogo, models.DO_NOTHING, primary_key=True)
+    accion_catalogo = models.OneToOneField(
+        AccionCatalogo, models.DO_NOTHING, primary_key=True)
     pnd = models.ForeignKey('Pnd', models.DO_NOTHING)
     peso = models.FloatField(blank=True, null=True)
 
@@ -78,7 +83,8 @@ class AccionDestinatario(models.Model):
     borrado = models.NullBooleanField()
     beneficiario_tipo_id = models.IntegerField()
     accion_id = models.IntegerField()
-    beneficiario_grupo = models.ForeignKey('BeneficiarioGrupo', models.DO_NOTHING, blank=True, null=True)
+    beneficiario_grupo = models.ForeignKey(
+        'BeneficiarioGrupo', models.DO_NOTHING, blank=True, null=True)
     fecha_insercion = models.DateTimeField(blank=True, null=True)
     usuario_responsable = models.TextField(blank=True, null=True)
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
@@ -120,7 +126,8 @@ class AccionHasGeoPoligono(models.Model):
     class Meta:
         managed = False
         db_table = 'accion_has_geo_poligono'
-        unique_together = (('accion_id', 'geo_poligono_id', 'geo_poligono_geo_poligono_id'),)
+        unique_together = (('accion_id', 'geo_poligono_id',
+                            'geo_poligono_geo_poligono_id'),)
 
 
 class AccionHasProducto(models.Model):
@@ -295,7 +302,8 @@ class AsignacionPresiTemp(models.Model):
     class Meta:
         managed = False
         db_table = 'asignacion_presi_temp'
-        unique_together = (('anho', 'version', 'nivel', 'entidad', 'tipo', 'programa', 'subprograma', 'proyecto', 'objeto_gasto', 'fuente_financiamiento', 'organismo_financiador', 'pais', 'departamento', 'producto'),)
+        unique_together = (('anho', 'version', 'nivel', 'entidad', 'tipo', 'programa', 'subprograma', 'proyecto',
+                            'objeto_gasto', 'fuente_financiamiento', 'organismo_financiador', 'pais', 'departamento', 'producto'),)
 
 
 class Avance(models.Model):
@@ -336,9 +344,12 @@ class AvanceCosto(models.Model):
 
 class AvanceCualitativo(models.Model):
     id = models.AutoField(primary_key=True)
-    accion_catalogo = models.ForeignKey(AccionCatalogo, models.DO_NOTHING, blank=True, null=True)
-    ins_linea_accion = models.ForeignKey('InsLineaAccion', models.DO_NOTHING, blank=True, null=True)
-    trimestre = models.ForeignKey('Trimestre', models.DO_NOTHING, blank=True, null=True)
+    accion_catalogo = models.ForeignKey(
+        AccionCatalogo, models.DO_NOTHING, blank=True, null=True)
+    ins_linea_accion = models.ForeignKey(
+        'InsLineaAccion', models.DO_NOTHING, blank=True, null=True)
+    trimestre = models.ForeignKey(
+        'Trimestre', models.DO_NOTHING, blank=True, null=True)
     gestiones_realizadas = models.TextField(blank=True, null=True)
     principales_logros_alcanzados = models.TextField(blank=True, null=True)
     dificultades_lecciones_aprendidas = models.TextField(blank=True, null=True)
@@ -374,8 +385,10 @@ class Beneficiario(models.Model):
     version = models.IntegerField(blank=True, null=True)
     borrado = models.NullBooleanField()
     cantidad = models.IntegerField(blank=True, null=True)
-    avance = models.ForeignKey(Avance, models.DO_NOTHING, blank=True, null=True)
-    beneficiario_grupo = models.ForeignKey('BeneficiarioGrupo', models.DO_NOTHING, blank=True, null=True)
+    avance = models.ForeignKey(
+        Avance, models.DO_NOTHING, blank=True, null=True)
+    beneficiario_grupo = models.ForeignKey(
+        'BeneficiarioGrupo', models.DO_NOTHING, blank=True, null=True)
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
     fecha_insercion = models.DateTimeField(blank=True, null=True)
     usuario_responsable = models.TextField(blank=True, null=True)
@@ -412,7 +425,8 @@ class BeneficiarioDetalleClave(models.Model):
 
 
 class BeneficiarioGrupo(models.Model):
-    tipo_beneficiario_grupo = models.ForeignKey('BeneficiarioTipo', models.DO_NOTHING)
+    tipo_beneficiario_grupo = models.ForeignKey(
+        'BeneficiarioTipo', models.DO_NOTHING)
     nombre = models.TextField(blank=True, null=True)
     descripcion = models.TextField(blank=True, null=True)
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
@@ -476,7 +490,8 @@ class Clase(models.Model):
 class Departamento(models.Model):
     id = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=50, blank=True, null=True)
-    paisid = models.ForeignKey('Pais', models.DO_NOTHING, db_column='paisid', blank=True, null=True)
+    paisid = models.ForeignKey(
+        'Pais', models.DO_NOTHING, db_column='paisid', blank=True, null=True)
     gobernador_id = models.IntegerField(blank=True, null=True)
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
     fecha_insercion = models.DateTimeField(blank=True, null=True)
@@ -506,7 +521,8 @@ class DimFecha(models.Model):
 
 
 class Distrito(models.Model):
-    departamentoid = models.ForeignKey(Departamento, models.DO_NOTHING, db_column='departamentoid', primary_key=True)
+    departamentoid = models.OneToOneField(
+        Departamento, models.DO_NOTHING, db_column='departamentoid', primary_key=True)
     id = models.IntegerField()
     descripcion = models.CharField(max_length=50, blank=True, null=True)
     intendente_id = models.IntegerField(blank=True, null=True)
@@ -541,9 +557,12 @@ class Documento(models.Model):
 class Empresa(models.Model):
     razon_social = models.CharField(max_length=1000)
     localid = models.IntegerField(blank=True, null=True)
-    capsocial = models.DecimalField(max_digits=18, decimal_places=2, blank=True, null=True)
-    tiponegocioid = models.ForeignKey('Tiponegocio', models.DO_NOTHING, db_column='tiponegocioid', blank=True, null=True)
-    claseid = models.ForeignKey(Clase, models.DO_NOTHING, db_column='claseid', blank=True, null=True)
+    capsocial = models.DecimalField(
+        max_digits=18, decimal_places=2, blank=True, null=True)
+    tiponegocioid = models.ForeignKey(
+        'Tiponegocio', models.DO_NOTHING, db_column='tiponegocioid', blank=True, null=True)
+    claseid = models.ForeignKey(
+        Clase, models.DO_NOTHING, db_column='claseid', blank=True, null=True)
     naturaleza = models.CharField(max_length=100, blank=True, null=True)
     fechainicio = models.DateField(blank=True, null=True)
     ruc = models.CharField(unique=True, max_length=50)
@@ -631,7 +650,8 @@ class Evidencia(models.Model):
 
 
 class EvidenciaHasDocumento(models.Model):
-    evidencia = models.ForeignKey(Evidencia, models.DO_NOTHING, primary_key=True)
+    evidencia = models.OneToOneField(
+        Evidencia, models.DO_NOTHING, primary_key=True)
     documento = models.ForeignKey(Documento, models.DO_NOTHING)
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
     fecha_insercion = models.DateTimeField(blank=True, null=True)
@@ -804,7 +824,8 @@ class InsLineaAccion(models.Model):
 
 
 class InsLineaAccionHasEtiqueta(models.Model):
-    ins_linea_accion = models.ForeignKey(InsLineaAccion, models.DO_NOTHING, primary_key=True)
+    ins_linea_accion = models.OneToOneField(
+        InsLineaAccion, models.DO_NOTHING, primary_key=True)
     etiqueta = models.ForeignKey(Etiqueta, models.DO_NOTHING)
     version = models.IntegerField(blank=True, null=True)
     borrado = models.NullBooleanField()
@@ -839,7 +860,8 @@ class Institucion(models.Model):
 
 
 class LaHasAreasAga(models.Model):
-    linea_accion = models.ForeignKey('LineaAccion', models.DO_NOTHING, primary_key=True)
+    linea_accion = models.OneToOneField(
+        'LineaAccion', models.DO_NOTHING, primary_key=True)
     areas_aga = models.ForeignKey(AreasAga, models.DO_NOTHING)
     peso = models.FloatField(blank=True, null=True)
 
@@ -850,7 +872,8 @@ class LaHasAreasAga(models.Model):
 
 
 class LaHasOds(models.Model):
-    linea_accion = models.ForeignKey('LineaAccion', models.DO_NOTHING, primary_key=True)
+    linea_accion = models.OneToOneField(
+        'LineaAccion', models.DO_NOTHING, primary_key=True)
     ods = models.ForeignKey('Ods', models.DO_NOTHING)
     peso = models.FloatField(blank=True, null=True)
 
@@ -861,7 +884,8 @@ class LaHasOds(models.Model):
 
 
 class LaHasPnd(models.Model):
-    linea_accion = models.ForeignKey('LineaAccion', models.DO_NOTHING, primary_key=True)
+    linea_accion = models.OneToOneField(
+        'LineaAccion', models.DO_NOTHING, primary_key=True)
     pnd = models.ForeignKey('Pnd', models.DO_NOTHING)
     peso = models.FloatField(blank=True, null=True)
 
@@ -1027,12 +1051,14 @@ class ProductoPresupuestoFinanciero(models.Model):
     objeto_gasto_id = models.IntegerField(blank=True, null=True)
     fuente_id = models.IntegerField(blank=True, null=True)
     funcional_id = models.IntegerField(blank=True, null=True)
-    funcional_nombre = models.CharField(max_length=21845, blank=True, null=True)
+    funcional_nombre = models.CharField(
+        max_length=21845, blank=True, null=True)
     departamento_id = models.IntegerField(blank=True, null=True)
     producto_id = models.IntegerField(blank=True, null=True)
     producto_nombre = models.CharField(max_length=21845, blank=True, null=True)
     unidad_medida_id = models.IntegerField(blank=True, null=True)
-    nombre_unidad_medida = models.CharField(max_length=21845, blank=True, null=True)
+    nombre_unidad_medida = models.CharField(
+        max_length=21845, blank=True, null=True)
     mes = models.IntegerField(blank=True, null=True)
     snip = models.IntegerField(blank=True, null=True)
     meta = models.FloatField(blank=True, null=True)
@@ -1089,7 +1115,8 @@ class Tareas(models.Model):
     descripcion = models.TextField(blank=True, null=True)
     fecha_inicio = models.DateTimeField(blank=True, null=True)
     fecha_fin = models.DateTimeField(blank=True, null=True)
-    tareas_padre = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True, related_name='tareaspadre')
+    tareas_padre = models.ForeignKey(
+        'self', models.DO_NOTHING, blank=True, null=True, related_name='tareaspadre')
     dias = models.IntegerField(blank=True, null=True)
     porcentaje_avance = models.IntegerField(blank=True, null=True)
     justificacion = models.TextField(blank=True, null=True)
@@ -1116,7 +1143,7 @@ class TareasEstados(models.Model):
 
 
 class TareasHasInstitucion(models.Model):
-    tareas = models.ForeignKey(Tareas, models.DO_NOTHING, primary_key=True)
+    tareas = models.OneToOneField(Tareas, models.DO_NOTHING, primary_key=True)
     institucion = models.ForeignKey(Institucion, models.DO_NOTHING)
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
     fecha_insercion = models.DateTimeField(blank=True, null=True)
@@ -1129,9 +1156,12 @@ class TareasHasInstitucion(models.Model):
 
 
 class TareasHasTareas(models.Model):
-    tareas = models.ForeignKey(Tareas, models.DO_NOTHING, primary_key=True, related_name='tareas')
-    tareas_id1 = models.ForeignKey(Tareas, models.DO_NOTHING, db_column='tareas_id1')
-    tipores_relaciones = models.ForeignKey('TiposRelaciones', models.DO_NOTHING)
+    tareas = models.OneToOneField(
+        Tareas, models.DO_NOTHING, primary_key=True, related_name='tareas')
+    tareas_id1 = models.ForeignKey(
+        Tareas, models.DO_NOTHING, db_column='tareas_id1')
+    tipores_relaciones = models.ForeignKey(
+        'TiposRelaciones', models.DO_NOTHING)
     usuario_responsable = models.TextField(blank=True, null=True)
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
     fecha_insercion = models.DateTimeField(blank=True, null=True)
@@ -1143,8 +1173,9 @@ class TareasHasTareas(models.Model):
 
 
 class TareasHasUsuario(models.Model):
-    tareas = models.ForeignKey(Tareas, models.DO_NOTHING, primary_key=True)
-    usuario_correo = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='usuario_correo')
+    tareas = models.OneToOneField(Tareas, models.DO_NOTHING, primary_key=True)
+    usuario_correo = models.ForeignKey(
+        'Usuario', models.DO_NOTHING, db_column='usuario_correo')
     fecha_insercion = models.DateTimeField(blank=True, null=True)
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
     usuario_responsable = models.TextField(blank=True, null=True)
@@ -1248,12 +1279,14 @@ class Usuario(models.Model):
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
     fecha_insercion = models.DateTimeField(blank=True, null=True)
     usuario_responsable = models.TextField(blank=True, null=True)
-    email_real = models.CharField(max_length=256, blank=True, null=True, default='true')
+    email_real = models.CharField(
+        max_length=256, blank=True, null=True, default='true')
     unr_id = models.IntegerField(blank=True, null=True)
     role_id_movil = models.IntegerField(blank=True, null=True)
     role_id_tablero = models.IntegerField(blank=True, null=True)
     role_identificaciones = models.IntegerField(blank=True, null=True)
-    borrado = models.CharField(max_length=256, blank=True, null=True, default='false')
+    borrado = models.CharField(
+        max_length=256, blank=True, null=True, default='false')
     url = models.TextField(blank=True, null=True)
 
     class Meta:
@@ -1334,7 +1367,8 @@ class Ws(models.Model):
     url = models.TextField(blank=True, null=True)
     metodo = models.TextField(blank=True, null=True)
     usuario = models.TextField(blank=True, null=True)
-    pass_field = models.TextField(db_column='pass', blank=True, null=True)  # Field renamed because it was a Python reserved word.
+    # Field renamed because it was a Python reserved word.
+    pass_field = models.TextField(db_column='pass', blank=True, null=True)
     id_clave = models.TextField(blank=True, null=True)
     id_valor = models.TextField(blank=True, null=True)
     ws_tipo_id = models.IntegerField()

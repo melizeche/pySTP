@@ -4,7 +4,8 @@
 #   * Make sure each model has one field with primary_key=True
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
+# Feel free to rename the models, but don't rename db_table values or
+# field names.
 from __future__ import unicode_literals
 
 from django.db import models
@@ -100,7 +101,8 @@ class AsignacionPresi(models.Model):
     class Meta:
         managed = False
         db_table = 'asignacion_presi'
-        unique_together = (('anho', 'version', 'nivel', 'entidad', 'tipo', 'programa', 'subprograma', 'proyecto', 'objeto_gasto', 'fuente_financiamiento', 'organismo_financiador', 'pais', 'departamento', 'producto'), ('anho', 'version', 'nivel', 'entidad', 'tipo', 'programa', 'subprograma', 'proyecto', 'objeto_gasto', 'fuente_financiamiento', 'organismo_financiador', 'pais', 'departamento', 'producto'),)
+        unique_together = (('anho', 'version', 'nivel', 'entidad', 'tipo', 'programa', 'subprograma', 'proyecto', 'objeto_gasto', 'fuente_financiamiento', 'organismo_financiador', 'pais', 'departamento', 'producto'),
+                           ('anho', 'version', 'nivel', 'entidad', 'tipo', 'programa', 'subprograma', 'proyecto', 'objeto_gasto', 'fuente_financiamiento', 'organismo_financiador', 'pais', 'departamento', 'producto'),)
 
 
 class AsignacionPresiAnt(models.Model):
@@ -203,7 +205,8 @@ class AsignacionPresiN(models.Model):
     class Meta:
         managed = False
         db_table = 'asignacion_presi_n'
-        unique_together = (('anho', 'version', 'nivel', 'entidad', 'tipo', 'programa', 'subprograma', 'proyecto', 'objeto_gasto', 'fuente_financiamiento', 'organismo_financiador', 'pais', 'departamento', 'producto'),)
+        unique_together = (('anho', 'version', 'nivel', 'entidad', 'tipo', 'programa', 'subprograma', 'proyecto',
+                            'objeto_gasto', 'fuente_financiamiento', 'organismo_financiador', 'pais', 'departamento', 'producto'),)
 
 
 class AsignacionPresiShadow(models.Model):
@@ -317,13 +320,15 @@ class AvanceIndicador(models.Model):
     class Meta:
         managed = False
         db_table = 'avance_indicador'
-        unique_together = (('id', 'indicador_id', 'zona_geografica_id', 'demografia_id', 'objetivo_id', 'tipo_objetivo_id', 'nivel', 'entidad'),)
+        unique_together = (('id', 'indicador_id', 'zona_geografica_id',
+                            'demografia_id', 'objetivo_id', 'tipo_objetivo_id', 'nivel', 'entidad'),)
 
 
 class CatalogoDestinatario(models.Model):
     nombre = models.TextField(blank=True, null=True)
     descripcion = models.TextField(blank=True, null=True)
-    tipo_catalogo_destinatario = models.ForeignKey('TipoCatalogoDestinatario', models.DO_NOTHING)
+    tipo_catalogo_destinatario = models.ForeignKey(
+        'TipoCatalogoDestinatario', models.DO_NOTHING)
     anho = models.IntegerField(blank=True, null=True)
     version = models.IntegerField(blank=True, null=True)
     borrado = models.NullBooleanField()
@@ -424,7 +429,8 @@ class DiccionarioCampos(models.Model):
     nombre = models.TextField()
     descripcion = models.TextField()
     referencia_html = models.TextField()
-    formulario = models.ForeignKey('DiccionarioFormularios', models.DO_NOTHING, blank=True, null=True)
+    formulario = models.ForeignKey(
+        'DiccionarioFormularios', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -570,6 +576,7 @@ class Entidad(models.Model):
 
     def __str__(self):
         return str(self.id) + " - " + self.nombre
+
     class Meta:
         managed = False
         db_table = 'entidad'
@@ -593,7 +600,8 @@ class Estrategia(models.Model):
     class Meta:
         managed = False
         db_table = 'estrategia'
-        unique_together = (('id', 'eje_estrategico_id', 'linea_transversal_id', 'plan'),)
+        unique_together = (('id', 'eje_estrategico_id',
+                            'linea_transversal_id', 'plan'),)
 
 
 class EstrategiaHasObjetivo(models.Model):
@@ -629,7 +637,8 @@ class EstructuraProgramatica(models.Model):
     nfproyecto = models.IntegerField()
     departamento = models.IntegerField()
     unidad_responsable = models.IntegerField()
-    funcional = models.ForeignKey('Funcional', models.DO_NOTHING, db_column='funcional')
+    funcional = models.ForeignKey(
+        'Funcional', models.DO_NOTHING, db_column='funcional')
     diagnostico = models.TextField()
     objetivo = models.TextField()
     resultado_esperado = models.TextField()
@@ -645,7 +654,8 @@ class EstructuraProgramatica(models.Model):
     class Meta:
         managed = False
         db_table = 'estructura_programatica'
-        unique_together = (('id', 'anho', 'nivel', 'entidad', 'tipo', 'programa', 'subprograma', 'proyecto', 'funcional'),)
+        unique_together = (('id', 'anho', 'nivel', 'entidad', 'tipo',
+                            'programa', 'subprograma', 'proyecto', 'funcional'),)
 
 
 class Etiquetas(models.Model):
@@ -735,7 +745,8 @@ class FundamentacionPresi(models.Model):
     class Meta:
         managed = False
         db_table = 'fundamentacion_presi'
-        unique_together = (('anho', 'version', 'nivel', 'entidad', 'tipo', 'programa', 'subprograma', 'proyecto', 'objeto_gasto', 'fuente_financiamiento', 'organismo_financiador', 'pais', 'departamento', 'clg', 'secuencia'),)
+        unique_together = (('anho', 'version', 'nivel', 'entidad', 'tipo', 'programa', 'subprograma', 'proyecto',
+                            'objeto_gasto', 'fuente_financiamiento', 'organismo_financiador', 'pais', 'departamento', 'clg', 'secuencia'),)
 
 
 class FundamentaciongastoPresi(models.Model):
@@ -786,7 +797,8 @@ class Indicador(models.Model):
     nivel_despliegue_geografico = models.IntegerField(blank=True, null=True)
     cobertura_demografica_alcance = models.IntegerField(blank=True, null=True)
     nivel_despliegue_demografica = models.IntegerField(blank=True, null=True)
-    institucion_responsable_calculo_indicador = models.TextField(blank=True, null=True)
+    institucion_responsable_calculo_indicador = models.TextField(
+        blank=True, null=True)
     evaluacion_heci = models.TextField(blank=True, null=True)
     contacto = models.TextField(blank=True, null=True)
     fecha_disponibilidad_informacion = models.TextField(blank=True, null=True)
@@ -804,7 +816,8 @@ class Indicador(models.Model):
     class Meta:
         managed = False
         db_table = 'indicador'
-        unique_together = (('id', 'tipo_indicador_id', 'unidad_medida_id', 'desagregacion_tipo_zona_geografica_id', 'tipo_demografica_id', 'objetivo_id', 'nivel', 'entidad'),)
+        unique_together = (('id', 'tipo_indicador_id', 'unidad_medida_id',
+                            'desagregacion_tipo_zona_geografica_id', 'tipo_demografica_id', 'objetivo_id', 'nivel', 'entidad'),)
 
 
 class IndicadorN(models.Model):
@@ -825,7 +838,8 @@ class IndicadorN(models.Model):
     nivel_despliegue_geografico = models.IntegerField(blank=True, null=True)
     cobertura_demografica_alcance = models.IntegerField(blank=True, null=True)
     nivel_despliegue_demografica = models.IntegerField(blank=True, null=True)
-    institucion_responsable_calculo_indicador = models.TextField(blank=True, null=True)
+    institucion_responsable_calculo_indicador = models.TextField(
+        blank=True, null=True)
     evaluacion_heci = models.TextField(blank=True, null=True)
     contacto = models.TextField(blank=True, null=True)
     fecha_disponibilidad_informacion = models.TextField(blank=True, null=True)
@@ -1007,7 +1021,7 @@ class Modulo(models.Model):
 
 
 class ModuloHasPermiso(models.Model):
-    role = models.ForeignKey('Role', models.DO_NOTHING, primary_key=True)
+    role = models.OneToOneField('Role', models.DO_NOTHING, primary_key=True)
     modulo = models.ForeignKey(Modulo, models.DO_NOTHING)
     permiso = models.ForeignKey('Permiso', models.DO_NOTHING)
     borrado = models.NullBooleanField()
@@ -1140,9 +1154,11 @@ class ObjetivoHasIndicador(models.Model):
     indicador_id = models.IntegerField()
     indicador_tipo_indicador_id = models.IntegerField(blank=True, null=True)
     indicador_unidad_medida_id = models.IntegerField(blank=True, null=True)
-    indicador_desagregacion_tipo_zona_geografica_id = models.IntegerField(blank=True, null=True)
+    indicador_desagregacion_tipo_zona_geografica_id = models.IntegerField(
+        blank=True, null=True)
     indicador_tipo_demografica_id = models.IntegerField(blank=True, null=True)
-    indicador_fuente_verificacion_id_old = models.IntegerField(blank=True, null=True)
+    indicador_fuente_verificacion_id_old = models.IntegerField(
+        blank=True, null=True)
     indicador_objetivo_id = models.IntegerField(blank=True, null=True)
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
     fecha_insercion = models.DateTimeField(blank=True, null=True)
@@ -1153,15 +1169,18 @@ class ObjetivoHasIndicador(models.Model):
     class Meta:
         managed = False
         db_table = 'objetivo_has_indicador'
-        unique_together = (('objetivo_id', 'objetivo_tipo_objetivo_id', 'objetivo_anho', 'objetivo_version', 'indicador_id', 'producto_concat'),)
+        unique_together = (('objetivo_id', 'objetivo_tipo_objetivo_id',
+                            'objetivo_anho', 'objetivo_version', 'indicador_id', 'producto_concat'),)
 
 
 class ObjetivoHasObjetivo(models.Model):
-    objetivo = models.ForeignKey(Objetivo, models.DO_NOTHING, primary_key=True)
+    objetivo = models.OneToOneField(
+        Objetivo, models.DO_NOTHING, primary_key=True)
     objetivo_tipo_objetivo_id = models.IntegerField()
     objetivo_anho = models.IntegerField()
     objetivo_version = models.IntegerField()
-    objetivo_rel = models.ForeignKey(Objetivo, models.DO_NOTHING, related_name='objetivorel')
+    objetivo_rel = models.ForeignKey(
+        Objetivo, models.DO_NOTHING, related_name='objetivorel')
     objetivo_rel_tipo_objetivo_id = models.IntegerField()
     objetivo_rel_anho = models.IntegerField()
     objetivo_rel_version = models.IntegerField()
@@ -1184,15 +1203,18 @@ class ObjetivoHasObjetivo(models.Model):
     class Meta:
         managed = False
         db_table = 'objetivo_has_objetivo'
-        unique_together = (('objetivo', 'objetivo_tipo_objetivo_id', 'objetivo_anho', 'objetivo_version', 'objetivo_rel', 'objetivo_rel_tipo_objetivo_id', 'objetivo_rel_anho', 'objetivo_rel_version', 'producto_concat'),)
+        unique_together = (('objetivo', 'objetivo_tipo_objetivo_id', 'objetivo_anho', 'objetivo_version', 'objetivo_rel',
+                            'objetivo_rel_tipo_objetivo_id', 'objetivo_rel_anho', 'objetivo_rel_version', 'producto_concat'),)
 
 
 class ObjetivoSugerido(models.Model):
-    objetivo = models.ForeignKey(Objetivo, models.DO_NOTHING, primary_key=True)
+    objetivo = models.OneToOneField(
+        Objetivo, models.DO_NOTHING, primary_key=True)
     objetivo_tipo_objetivo_id = models.IntegerField()
     objetivo_anho = models.IntegerField()
     objetivo_version = models.IntegerField()
-    objetivo_sugerido = models.ForeignKey(Objetivo, models.DO_NOTHING, related_name='objetivosuge')
+    objetivo_sugerido = models.ForeignKey(
+        Objetivo, models.DO_NOTHING, related_name='objetivosuge')
     objetivo_sugerido_tipo_id = models.IntegerField()
     objetivo_sugerido_anho = models.IntegerField()
     objetivo_sugerido_version = models.IntegerField()
@@ -1204,7 +1226,8 @@ class ObjetivoSugerido(models.Model):
     class Meta:
         managed = False
         db_table = 'objetivo_sugerido'
-        unique_together = (('objetivo', 'objetivo_tipo_objetivo_id', 'objetivo_anho', 'objetivo_version', 'objetivo_sugerido', 'objetivo_sugerido_tipo_id', 'objetivo_sugerido_anho', 'objetivo_sugerido_version'),)
+        unique_together = (('objetivo', 'objetivo_tipo_objetivo_id', 'objetivo_anho', 'objetivo_version',
+                            'objetivo_sugerido', 'objetivo_sugerido_tipo_id', 'objetivo_sugerido_anho', 'objetivo_sugerido_version'),)
 
 
 class ObjetoDeGasto(models.Model):
@@ -1267,7 +1290,8 @@ class PermisosModulos(models.Model):
 
 class PermisosPorModulos(models.Model):
     id = models.AutoField(primary_key=True)
-    modulos = models.ForeignKey(Modulos, models.DO_NOTHING, primary_key=True)
+    modulos = models.OneToOneField(
+        Modulos, models.DO_NOTHING, primary_key=True)
     usuario_id = models.IntegerField()
     permisos_modulos = models.ForeignKey(PermisosModulos, models.DO_NOTHING)
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
@@ -1363,7 +1387,8 @@ class PresupuestoGasto(models.Model):
     class Meta:
         managed = False
         db_table = 'presupuesto_gasto'
-        unique_together = (('codigonivel', 'codigoentidad', 'tipoprograma', 'codigoprograma', 'codigosubprograma', 'codigoproyecto', 'codigoobjetogasto', 'codigofuentefinan', 'codigoorgfinanciador', 'codigodpto', 'codigopais', 'borrado', 'anho', 'version'),)
+        unique_together = (('codigonivel', 'codigoentidad', 'tipoprograma', 'codigoprograma', 'codigosubprograma', 'codigoproyecto',
+                            'codigoobjetogasto', 'codigofuentefinan', 'codigoorgfinanciador', 'codigodpto', 'codigopais', 'borrado', 'anho', 'version'),)
 
 
 class PresupuestogastoPresi(models.Model):
@@ -1552,7 +1577,8 @@ class ProductoPresupuestoDestinatario(models.Model):
     class Meta:
         managed = False
         db_table = 'producto_presupuesto_destinatario'
-        unique_together = (('nivel', 'entidad', 'tipo_presupuesto', 'programa', 'subprograma', 'proyecto', 'producto', 'catalogo_destinatario', 'departamento'),)
+        unique_together = (('nivel', 'entidad', 'tipo_presupuesto', 'programa', 'subprograma',
+                            'proyecto', 'producto', 'catalogo_destinatario', 'departamento'),)
 
 
 class ProductoPresupuestoDestinatarioShadow(models.Model):
@@ -1639,7 +1665,8 @@ class ProductoPresupuestoMeta(models.Model):
     class Meta:
         managed = False
         db_table = 'producto_presupuesto_meta'
-        unique_together = (('id', 'catalogo_destinatario_id', 'departamento_id', 'producto_presupusto_id', 'producto_id', 'unidad_medida_id', 'proyecto_id', 'subprograma_id', 'programa_id', 'tipo_presupuesto_id', 'entidad_id', 'nivel_id'),)
+        unique_together = (('id', 'catalogo_destinatario_id', 'departamento_id', 'producto_presupusto_id', 'producto_id',
+                            'unidad_medida_id', 'proyecto_id', 'subprograma_id', 'programa_id', 'tipo_presupuesto_id', 'entidad_id', 'nivel_id'),)
 
 
 class ProductoPresupuestoMetaN(models.Model):
@@ -1737,7 +1764,8 @@ class ProductoPresupustoHasEtiquetas(models.Model):
     class Meta:
         managed = False
         db_table = 'producto_presupusto_has_etiquetas'
-        unique_together = (('producto_id', 'proyecto_id', 'subprograma_id', 'programa_id', 'tipo_presupuesto_id', 'entidad_id', 'nivel_id', 'anho', 'version', 'etiquetas_id'),)
+        unique_together = (('producto_id', 'proyecto_id', 'subprograma_id', 'programa_id',
+                            'tipo_presupuesto_id', 'entidad_id', 'nivel_id', 'anho', 'version', 'etiquetas_id'),)
 
 
 class Programa(models.Model):
@@ -1764,13 +1792,15 @@ class Programa(models.Model):
     class Meta:
         managed = False
         db_table = 'programa'
-        unique_together = (('id', 'tipo_presupuesto', 'entidad_id', 'entidad_nivel_id'),)
+        unique_together = (
+            ('id', 'tipo_presupuesto', 'entidad_id', 'entidad_nivel_id'),)
 
 
 class Programatico(models.Model):
     nombre = models.TextField(blank=True, null=True)
     descripcion = models.TextField(blank=True, null=True)
-    tipo_programatico = models.ForeignKey('TipoProgramatico', models.DO_NOTHING)
+    tipo_programatico = models.ForeignKey(
+        'TipoProgramatico', models.DO_NOTHING)
     borrado = models.NullBooleanField()
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
     fecha_insercion = models.DateTimeField(blank=True, null=True)
@@ -1783,7 +1813,8 @@ class Programatico(models.Model):
 
 
 class ProgramaticoHasObjetivo(models.Model):
-    programatico = models.ForeignKey(Programatico, models.DO_NOTHING, primary_key=True)
+    programatico = models.OneToOneField(
+        Programatico, models.DO_NOTHING, primary_key=True)
     programatico_tipo_programatico_id = models.IntegerField()
     borrado = models.NullBooleanField()
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
@@ -1793,7 +1824,8 @@ class ProgramaticoHasObjetivo(models.Model):
     class Meta:
         managed = False
         db_table = 'programatico_has_objetivo'
-        unique_together = (('programatico', 'programatico_tipo_programatico_id'),)
+        unique_together = (
+            ('programatico', 'programatico_tipo_programatico_id'),)
 
 
 class Proyecto(models.Model):
@@ -1813,7 +1845,8 @@ class Proyecto(models.Model):
     codigo_departamento = models.IntegerField(blank=True, null=True)
     codigo_snip = models.IntegerField(blank=True, null=True)
     objetivo_estrategico_id = models.IntegerField(blank=True, null=True)
-    objetivo_estrategico_id_old = models.CharField(max_length=45, blank=True, null=True)
+    objetivo_estrategico_id_old = models.CharField(
+        max_length=45, blank=True, null=True)
     borrado = models.NullBooleanField()
     version = models.IntegerField(blank=True, null=True)
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
@@ -1823,7 +1856,8 @@ class Proyecto(models.Model):
     class Meta:
         managed = False
         db_table = 'proyecto'
-        unique_together = (('id', 'subprograma_id', 'subprograma_programa_id', 'subprograma_programa_tipo_presupuesto_id', 'subprograma_programa_entidad_id', 'subprograma_programa_entidad_nivel_id', 'unidad_responsable_id', 'funcional_id'),)
+        unique_together = (('id', 'subprograma_id', 'subprograma_programa_id', 'subprograma_programa_tipo_presupuesto_id',
+                            'subprograma_programa_entidad_id', 'subprograma_programa_entidad_nivel_id', 'unidad_responsable_id', 'funcional_id'),)
 
 
 class ProyectoHasObjetivo(models.Model):
@@ -1872,8 +1906,10 @@ class ProyectoSnipAutorizado(models.Model):
     entidad = models.ForeignKey(Entidad, models.DO_NOTHING)
     entidad_nivel_id = models.IntegerField()
     proyecto_snip = models.ForeignKey(ProyectoSnip, models.DO_NOTHING)
-    organismo_financiador = models.ForeignKey(OrganismoFinanciador, models.DO_NOTHING)
-    fuente_financiamiento = models.ForeignKey(FuenteFinanciamiento, models.DO_NOTHING)
+    organismo_financiador = models.ForeignKey(
+        OrganismoFinanciador, models.DO_NOTHING)
+    fuente_financiamiento = models.ForeignKey(
+        FuenteFinanciamiento, models.DO_NOTHING)
     borrado = models.NullBooleanField()
     version = models.IntegerField(blank=True, null=True)
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
@@ -1883,7 +1919,8 @@ class ProyectoSnipAutorizado(models.Model):
     class Meta:
         managed = False
         db_table = 'proyecto_snip_autorizado'
-        unique_together = (('id', 'entidad', 'entidad_nivel_id', 'proyecto_snip', 'organismo_financiador', 'fuente_financiamiento'), ('entidad_nivel_id', 'entidad', 'proyecto_snip'),)
+        unique_together = (('id', 'entidad', 'entidad_nivel_id', 'proyecto_snip', 'organismo_financiador',
+                            'fuente_financiamiento'), ('entidad_nivel_id', 'entidad', 'proyecto_snip'),)
 
 
 class Role(models.Model):
@@ -1934,7 +1971,8 @@ class Subprograma(models.Model):
     class Meta:
         managed = False
         db_table = 'subprograma'
-        unique_together = (('id', 'programa', 'programa_tipo_presupuesto_id', 'programa_entidad_id', 'programa_entidad_nivel_id'),)
+        unique_together = (('id', 'programa', 'programa_tipo_presupuesto_id',
+                            'programa_entidad_id', 'programa_entidad_nivel_id'),)
 
 
 class TipoCatalogoDestinatario(models.Model):
@@ -2098,7 +2136,8 @@ class UnidadResponsable(models.Model):
     class Meta:
         managed = False
         db_table = 'unidad_responsable'
-        unique_together = (('id', 'entidad_id', 'entidad_nivel_id', 'unidad_jerarquica_id'),)
+        unique_together = (
+            ('id', 'entidad_id', 'entidad_nivel_id', 'unidad_jerarquica_id'),)
 
 
 class Usuario(models.Model):
@@ -2161,7 +2200,8 @@ class ZonaGeografica(models.Model):
     nombre = models.TextField(blank=True, null=True)
     descripcion = models.TextField(blank=True, null=True)
     abrev = models.TextField(blank=True, null=True)
-    tipo_zona_geografica = models.ForeignKey(TipoZonaGeografica, models.DO_NOTHING)
+    tipo_zona_geografica = models.ForeignKey(
+        TipoZonaGeografica, models.DO_NOTHING)
     cod_geo_unif = models.TextField(blank=True, null=True)
     borrado = models.NullBooleanField()
     fecha_actualizacion = models.DateTimeField(blank=True, null=True)
