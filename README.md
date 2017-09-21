@@ -12,13 +12,13 @@ Implementación del Sistema de Planificación por Resultado(SPR) Tablero de Cont
 You need to install python3 and optionally virtualenv
 
 ```bash
-sudo apt-get install python3 python3-virtualenv -y
+sudo apt-get install python3 virtualenv -y
 ```
 
 Virtualenv is optional but strongly suggested
 ```
 git clone https://github.com/melizeche/pySTP.git
-cd pystp
+cd pySTP
 virtualenv env -p python3
 source env/bin/activate
 pip install -r requirements.txt
