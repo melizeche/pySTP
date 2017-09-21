@@ -9,10 +9,10 @@ Implementación del Sistema de Planificación por Resultado(SPR) Tablero de Cont
 
 ## Installation
 
-You need to install python3
+You need to install python3 and optionally virtualenv
 
 ```bash
-sudo apt-get install python3 -y
+sudo apt-get install python3 python3-virtualenv -y
 ```
 
 Virtualenv is optional but strongly suggested
