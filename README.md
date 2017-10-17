@@ -6,6 +6,7 @@ Implementación del Sistema de Planificación por Resultado(SPR) Tablero de Cont
 
 * Python 3.6
 * Django 1.11
+* Django REST Framework 3.6
 
 ## Installation
 
